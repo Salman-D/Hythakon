@@ -31,22 +31,45 @@ export default function Todo() {
   }, []);
 
   const getDatabase = async () => {
-    try {
-      database().ref('Forms/WEB').once("value").then(function (snapshot) {
-        console.log(snapshot.val()[1])
+    database().ref('Forms/WEB').once("value").then(function(snapshot){
+   
+      console.log(snapshot.val())
+      var key = Object.values(snapshot.val()) 
+      var userdata =[]
+      for(var i=0;i<key.length;i++){
+        console.log(key[i])
+  
+        userdata.push(key[i])
+  
+      } 
+      
+      // console.log(userdata)
+      // console.log(key);
+      setList(userdata);
+      // console.log(data)
+      console.log(key[0].City);
+    })
+    // try {
+    //   database().ref('Forms/WEB').once("value").then(function (snapshot) {
+    //     console.log(snapshot.val()[1])
 
-        var userdata = []
+    //     var userdata = []
+        
+    //       var getdata = Object.values(snapshot.val())
 
-        for (var i = 1; i < snapshot.val().length; i++) {
-          console.log(snapshot.val()[i])
-          userdata.push(snapshot.val()[i])
+    //       console.log(getdata)
+          
+    //     for (var i = 1; i < getdata; i++) {
+    //       console.log(snapshot.val()[i])
 
-        }
-        setList(userdata);
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    //       userdata.push(snapshot.val()[i])
+
+    //     }
+    //     setList(userdata);
+    //   });
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
 
 
@@ -63,22 +86,19 @@ export default function Todo() {
           </Text>
 
           {list.map((v, i) => {
-            console.log(v)
+            console.log(v.City)
             return (
 
               <View style={styles.card} key={i}>
-                <Text>Timing : {v.Timing}</Text>
-                <Text>Days : {v.WEB.City}</Text>
-                <Text>Teacher Name : {v.Sir}</Text>
-                <Text >Course Doration : {v.CCO}</Text>
-                <Text>Minimum Edution : {v.Sir}</Text>
-                {/* <TouchableOpacity  onPress={()=> RegisterCouse()}>
-                  <View>
-                    <Text style={styles.JoinCourse}>
-                      Join this Course
-                    </Text>
-                  </View>
-                </TouchableOpacity> */}
+
+                <Text>First Name : {v.FNAME}</Text>
+                <Text>Last Name : {v.LNAME}</Text>
+                <Text>Email : {v.EMAIL}</Text>
+                <Text>Contact No : {v.PhoneNo}</Text>
+                <Text>City : {v.City}</Text>
+                <Text>CourseName : {v.CourseName}</Text>
+                <Text>Education : {v.Education}</Text>
+
               </View>
 
             )
