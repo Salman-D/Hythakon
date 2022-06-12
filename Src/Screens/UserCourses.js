@@ -12,26 +12,47 @@ import {
   ScrollView,
 } from 'react-native';
 import database from '@react-native-firebase/database';
-import { useNavigation, StackActions } from '@react-navigation/native';
 
 
 export default function Todo() {
 
-  const navigation = useNavigation();
-
-  const RegisterCouse = () => {
-    navigation.navigate('Register Couse')
-  }
 
 
   const [list, setList] = useState([]);
+  const [list2, setList2] = useState([]);
+  const [list3, setList3] = useState([]);
+  const [list4, setList4] = useState([]);
 
   useEffect(() => {
     getDatabase();
+    getDatabase2();
+    getDatabase3();
+    getDatabase4();
   }, []);
 
   const getDatabase = async () => {
     database().ref('Forms/WEB').once("value").then(function(snapshot){
+   
+      // console.log(snapshot.val())
+      var key = Object.values(snapshot.val()) 
+      var userdata =[]
+      for(var i=0;i<key.length;i++){
+        // console.log(key[i])
+  
+        userdata.push(key[i])
+  
+      } 
+      
+      // console.log(userdata)
+      // console.log(key);
+      setList(userdata);
+      // console.log(data)
+      // console.log(key[0].City);
+    })
+  };
+
+  const getDatabase2 = async () => {
+    database().ref('Forms/CCNA').once("value").then(function(snapshot){
    
       console.log(snapshot.val())
       var key = Object.values(snapshot.val()) 
@@ -45,34 +66,53 @@ export default function Todo() {
       
       // console.log(userdata)
       // console.log(key);
-      setList(userdata);
+      setList2(userdata);
       // console.log(data)
-      console.log(key[0].City);
+      console.log(key[0].CourseName);
     })
-    // try {
-    //   database().ref('Forms/WEB').once("value").then(function (snapshot) {
-    //     console.log(snapshot.val()[1])
-
-    //     var userdata = []
-        
-    //       var getdata = Object.values(snapshot.val())
-
-    //       console.log(getdata)
-          
-    //     for (var i = 1; i < getdata; i++) {
-    //       console.log(snapshot.val()[i])
-
-    //       userdata.push(snapshot.val()[i])
-
-    //     }
-    //     setList(userdata);
-    //   });
-    // } catch (err) {
-    //   console.log(err);
-    // }
   };
 
+  const getDatabase3 = async () => {
+    database().ref('Forms/CCNA').once("value").then(function(snapshot){
+   
+      console.log(snapshot.val())
+      var key = Object.values(snapshot.val()) 
+      var userdata =[]
+      for(var i=0;i<key.length;i++){
+        console.log(key[i])
+  
+        userdata.push(key[i])
+  
+      } 
+      
+      // console.log(userdata)
+      // console.log(key);
+      setList2(userdata);
+      // console.log(data)
+      console.log(key[0].CourseName);
+    })
+  };
 
+  const getDatabase4 = async () => {
+    database().ref('Forms/Flutter').once("value").then(function(snapshot){
+   
+      console.log(snapshot.val())
+      var key = Object.values(snapshot.val()) 
+      var userdata =[]
+      for(var i=0;i<key.length;i++){
+        console.log(key[i])
+  
+        userdata.push(key[i])
+  
+      } 
+      
+      // console.log(userdata)
+      // console.log(key);
+      setList4(userdata);
+      // console.log(data)
+      // console.log(key[0].CourseName);
+    })
+  };
 
   return (
 
@@ -82,7 +122,7 @@ export default function Todo() {
       <ScrollView>
         <View style={styles.cardContainer}>
           <Text style={{ marginVertical: 20, fontSize: 20, fontWeight: 'bold' }}>
-            Course List
+            WEB  Student List
           </Text>
 
           {list.map((v, i) => {
@@ -104,6 +144,79 @@ export default function Todo() {
             )
             
           })}
+
+
+          <Text style={{ marginVertical: 20, fontSize: 20, fontWeight: 'bold' }}>
+            CCNA Student List
+          </Text>
+          
+          {list2.map((v, i) => {
+            console.log(v.City)
+            return (
+
+              <View style={styles.card} key={i}>
+
+                <Text>First Name : {v.FNAME}</Text>
+                <Text>Last Name : {v.LNAME}</Text>
+                <Text>Email : {v.EMAIL}</Text>
+                <Text>Contact No : {v.PhoneNo}</Text>
+                <Text>City : {v.City}</Text>
+                <Text>CourseName : {v.CourseName}</Text>
+                <Text>Education : {v.Education}</Text>
+
+              </View>
+
+            )
+            
+          })}
+
+          {/* <Text style={{ marginVertical: 20, fontSize: 20, fontWeight: 'bold' }}>
+            CCO Student List
+          </Text>
+          
+          {list3.map((v, i) => {
+            // console.log(v.City)
+            return (
+
+              <View style={styles.card} key={i}>
+
+                <Text>First Name : {v.FNAME}</Text>
+                <Text>Last Name : {v.LNAME}</Text>
+                <Text>Email : {v.EMAIL}</Text>
+                <Text>Contact No : {v.PhoneNo}</Text>
+                <Text>City : {v.City}</Text>
+                <Text>CourseName : {v.CourseName}</Text>
+                <Text>Education : {v.Education}</Text>
+
+              </View>
+
+            )
+            
+          })}
+
+          <Text style={{ marginVertical: 20, fontSize: 20, fontWeight: 'bold' }}>
+            Flutter Student List
+          </Text>
+          
+          {list4.map((v, i) => {
+            // console.log(v.City)
+            return (
+
+              <View style={styles.card} key={i}>
+
+                <Text>First Name : {v.FNAME}</Text>
+                <Text>Last Name : {v.LNAME}</Text>
+                <Text>Email : {v.EMAIL}</Text>
+                <Text>Contact No : {v.PhoneNo}</Text>
+                <Text>City : {v.City}</Text>
+                <Text>CourseName : {v.CourseName}</Text>
+                <Text>Education : {v.Education}</Text>
+
+              </View>
+
+            )
+            
+          })} */}
 
         </View>
       </ScrollView>

@@ -2,10 +2,15 @@ import React, {useState} from 'react';
 import {View, Text, TextInput, TouchableOpacity ,Dimensions ,StyleSheet} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
+import { useNavigation, StackActions } from '@react-navigation/native';
 
 
 
 const CreateAccount = () => {
+
+  const navigation = useNavigation();
+
+
   const [Fname, setFname] = useState('');
   const [Lname, setLname] = useState('');
   const  [CourseName, setCourseName] = useState('');
@@ -40,7 +45,7 @@ const JoinCourse = () =>{
     CourseName,
 
   })
-
+  navigation.navigate('Course_List')
 
 }
 
